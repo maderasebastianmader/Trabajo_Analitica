@@ -1,6 +1,4 @@
 {
-  "model_type": "binary_classification",
-  "dataset": "Adult (UCI)",
   "features": [
     "age",
     "workclass",
@@ -17,6 +15,14 @@
     "hours-per-week",
     "native-country"
   ],
+  "numerical_features": [
+    "age",
+    "fnlwgt",
+    "education-num",
+    "capital-gain",
+    "capital-loss",
+    "hours-per-week"
+  ],
   "categorical_features": [
     "workclass",
     "education",
@@ -27,20 +33,10 @@
     "sex",
     "native-country"
   ],
-  "numerical_features": [
-    "age",
-    "fnlwgt",
-    "education-num",
-    "capital-gain",
-    "capital-loss",
-    "hours-per-week"
-  ],
   "target_labels": [
     "<=50K",
     ">50K"
   ],
-  "train_size": 22792,
-  "test_size": 9769,
   "example": {
     "age": 39,
     "workclass": "State-gov",

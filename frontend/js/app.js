@@ -231,6 +231,32 @@ function showBatchResults(data) {
     let metricsHTML = '';
     if (data.metrics) {
         const m = data.metrics;
+        let confusionMatrixHTML = '';
+        if (m.confusion_matrix) {
+            confusionMatrixHTML = `
+                <div style="background:white;padding:16px;border-radius:6px;border:1px solid #c8e6c9;margin-top:12px;">
+                    <div style="font-size:14px;font-weight:600;margin-bottom:12px;color:#2e7d32;">Matriz de Confusión</div>
+                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:200px;margin:0 auto;">
+                        <div style="text-align:center;padding:8px;background:#f1f8e9;border:1px solid #c8e6c9;border-radius:4px;">
+                            <div style="font-size:18px;font-weight:700;color:#4caf50;">${m.confusion_matrix[0][0]}</div>
+                            <div style="font-size:10px;color:#666;">Verdaderos <=50K</div>
+                        </div>
+                        <div style="text-align:center;padding:8px;background:#ffebee;border:1px solid #ffcdd2;border-radius:4px;">
+                            <div style="font-size:18px;font-weight:700;color:#f44336;">${m.confusion_matrix[0][1]}</div>
+                            <div style="font-size:10px;color:#666;">Falsos >50K</div>
+                        </div>
+                        <div style="text-align:center;padding:8px;background:#ffebee;border:1px solid #ffcdd2;border-radius:4px;">
+                            <div style="font-size:18px;font-weight:700;color:#f44336;">${m.confusion_matrix[1][0]}</div>
+                            <div style="font-size:10px;color:#666;">Falsos <=50K</div>
+                        </div>
+                        <div style="text-align:center;padding:8px;background:#f1f8e9;border:1px solid #c8e6c9;border-radius:4px;">
+                            <div style="font-size:18px;font-weight:700;color:#4caf50;">${m.confusion_matrix[1][1]}</div>
+                            <div style="font-size:10px;color:#666;">Verdaderos >50K</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
         metricsHTML = `
             <div style="background:#e8f5e9;border-left:4px solid #4caf50;padding:16px;margin:16px 0;border-radius:8px;">
                 <div style="font-weight:700;margin-bottom:12px;color:#2e7d32;">📊 Métricas de Desempeño</div>
@@ -252,6 +278,7 @@ function showBatchResults(data) {
                         <div style="font-size:24px;font-weight:700;color:#4caf50;">${(m.f1_score * 100).toFixed(2)}%</div>
                     </div>
                 </div>
+                ${confusionMatrixHTML}
             </div>
         `;
     }
