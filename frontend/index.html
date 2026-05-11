@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salario Claro - Predicción de Ingresos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand-block">
+            <div class="brand-icon">💡</div>
+            <div>
+                <span class="brand-name">Salario Claro</span>
+                <p class="brand-tag">Predicción de ingresos con modelos de clasificación</p>
+            </div>
+        </div>
+
+        <nav class="top-nav">
+            <a href="#home" class="nav-link active" data-section="home">Inicio</a>
+            <a href="#predict" class="nav-link" data-section="predict">Individual</a>
+            <a href="#batch" class="nav-link" data-section="batch">Por Lote</a>
+            <a href="#metrics" class="nav-link" data-section="metrics">Métricas</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section id="home" class="section active">
+            <div class="hero-panel">
+                <div class="hero-copy">
+                    <span class="eyebrow">Solución de IA</span>
+                    <h1>Predicción de salario para cada perfil laboral</h1>
+                    <p>Sube datos reales, genera predicciones claras y compara dos modelos entrenados con el dataset Adult.</p>
+                    <div class="hero-actions">
+                        <a href="#predict" class="btn btn-primary">Probar ahora</a>
+                        <a href="#metrics" class="btn btn-secondary">Ver métricas</a>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <strong>32.561</strong>
+                        <span>Registros</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>14</strong>
+                        <span>Atributos</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>2</strong>
+                        <span>Modelos</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overview-grid">
+                <article class="overview-card">
+                    <h2>¿Qué hace?</h2>
+                    <p>Salario Claro utiliza regresión logística y una red neuronal para estimar si una persona gana más o menos de $50K al año.</p>
+                </article>
+                <article class="overview-card">
+                    <h2>¿Para quién?</h2>
+                    <p>Ideal para estudiantes, proyectos de aprendizaje automático y análisis de clasificación binaria con datos reales.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="predict" class="section">
+            <div class="section-header">
+                <span class="eyebrow">Individual</span>
+                <h2>Predicción por registro</h2>
+                <p>Introduce un perfil laboral para obtener una predicción inmediata.</p>
+            </div>
+
+            <div class="panel-grid">
+                <div class="form-panel">
+                    <div class="panel-title">Modelo y datos</div>
+                    <div class="model-selector">
+                        <label>Selecciona el modelo</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="model" value="logistic_regression" checked>
+                                <span>Regresión Logística</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="model" value="neural_network">
+                                <span>Red Neuronal</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <form id="predict-form" class="form">
+                        <div class="form-grid"></div>
+                        <button type="submit" class="btn btn-primary">Calcular predicción</button>
+                    </form>
+                </div>
+
+                <div class="result-panel" id="result" style="display: none;">
+                    <div class="panel-title">Resultado</div>
+                    <div class="result-card">
+                        <div id="result-emoji" class="result-emoji"></div>
+                        <div id="result-label" class="result-label"></div>
+                        <div class="result-probabilities">
+                            <div class="probability">
+                                <span>Probabilidad ≤50K</span>
+                                <div class="progress-bar">
+                                    <div id="prob0" class="progress-fill"></div>
+                                </div>
+                                <span id="prob0-text">0%</span>
+                            </div>
+                            <div class="probability">
+                                <span>Probabilidad >50K</span>
+                                <div class="progress-bar">
+                                    <div id="prob1" class="progress-fill"></div>
+                                </div>
+                                <span id="prob1-text">0%</span>
+                            </div>
+                        </div>
+                        <p class="result-model" id="result-model"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="batch" class="section">
+            <div class="section-header">
+                <span class="eyebrow">CSV</span>
+                <h2>Predicción por lote</h2>
+                <p>Sube un archivo CSV con múltiples registros y recibe un resumen de predicciones.</p>
+            </div>
+
+            <div class="panel-grid">
+                <div class="upload-panel">
+                    <div class="panel-title">Modelo y archivo</div>
+                    <div class="model-selector">
+                        <label>Selecciona el modelo</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="batch-model" value="logistic_regression" checked>
+                                <span>Regresión Logística</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="batch-model" value="neural_network">
+                                <span>Red Neuronal</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="upload-zone" id="upload-zone">
+                        <div class="upload-content">
+                            <div class="upload-icon">📁</div>
+                            <p>Arrastra o selecciona tu archivo CSV</p>
+                            <p class="upload-subtext">La tabla debe incluir las mismas columnas que el dataset</p>
+                        </div>
+                        <input type="file" id="csv-input" accept=".csv" style="display:none;">
+                    </div>
+                    <div class="batch-actions">
+                        <button id="btn-predict-batch" class="btn btn-primary" disabled>Predecir lote</button>
+                        <button id="btn-download-example" class="btn btn-secondary">Ejemplo CSV</button>
+                    </div>
+                </div>
+                <div class="batch-panel" id="batch-results" style="display:none;">
+                    <div class="panel-title">Resultados</div>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Predicción</th>
+                                <th>Prob ≤50K</th>
+                                <th>Prob >50K</th>
+                            </tr>
+                        </thead>
+                        <tbody id="batch-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="metrics" class="section">
+            <div class="section-header">
+                <span class="eyebrow">Comparativa</span>
+                <h2>Métricas de desempeño</h2>
+                <p>Visualiza los resultados de cada modelo de forma clara y organizada.</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>Regresión Logística</h3>
+                    <div id="lr-detailed-metrics" class="metrics-detail"></div>
+                </div>
+                <div class="metric-card">
+                    <h3>Red Neuronal</h3>
+                    <div id="nn-detailed-metrics" class="metrics-detail"></div>
+                </div>
+            </div>
+
+            <div class="metrics-visualization">
+                <h3 style="margin-bottom: 24px; font-size: 1.3rem;">Matriz de Confusión y Análisis Comparativo</h3>
+                <div class="visualization-container">
+                    <img src="/static/training_summary.png" alt="Matriz de Confusión" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
